@@ -17,4 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/tinymce', function () {
+    return view('tinymce');
+});
+
 require __DIR__.'/auth.php';
