@@ -10,20 +10,23 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+    <body class="dark text-bodydark bg-boxdark-2">
+        {{-- <!-- ===== Preloader Start ===== -->
+        <include src="./partials/preloader.html"></include>
+        <!-- ===== Preloader End ===== --> --}}
+        <div class="flex h-screen overflow-hidden">
+            <div class="relative flex flex-col justify-center flex-1 overflow-x-hidden overflow-y-auto" >
+                <main>
+                    <div class="p-4 mx-auto max-w-screen-2xl md:p-6 2xl:p-10">
+                        {{ $slot }}
+                    </div>
+                </main>
             </div>
         </div>
     </body>
