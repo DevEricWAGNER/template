@@ -6,20 +6,18 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" href="{{ asset('img/logo.svg') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
     <body class="dark text-bodydark bg-boxdark-2">
-        {{-- <!-- ===== Preloader Start ===== -->
-        <include src="./partials/preloader.html"></include>
-        <!-- ===== Preloader End ===== --> --}}
+        @include('partials.preloader')
         <div class="flex h-screen overflow-hidden">
             <div class="relative flex flex-col justify-center flex-1 overflow-x-hidden overflow-y-auto" >
                 <main>
