@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-        <link rel="icon" href="{{ asset('img/logo.svg') }}">
+        <title>{{ config('app.name', 'WAG CMS') }}</title>
+        <link rel="shortcut icon" href="{{ asset('favicon_backoffice.ico') }}" type="image/x-icon">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

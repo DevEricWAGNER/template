@@ -55,7 +55,7 @@
 
                         <!-- Password -->
                         <div class="mb-6">
-                            <x-input-label for="password" :value="__('Re-type Password')" />
+                            <x-input-label for="password" :value="__('Password')" />
 
                             <div class="relative">
                                     <x-text-input
