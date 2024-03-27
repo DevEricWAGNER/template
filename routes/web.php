@@ -11,7 +11,7 @@ Route::get('/wag_cms/tinymce', function () {
     return view('tinymce');
 });
 
-Route::prefix('/wag_cms')->middleware('auth')->group(function () {
+Route::prefix('/controlpanel')->middleware('auth')->group(function () {
     Route::get('/', function () {
         return redirect()->route('dashboard');
     });

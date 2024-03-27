@@ -9,6 +9,12 @@ export default {
         './resources/views/**/*.blade.php',
     ],
     darkMode: 'class',
+    variants: {
+        extend: {
+          backgroundColor: ['dark'],
+          // add other utilities you want to enable for dark mode
+        },
+    },
     theme: {
         fontFamily: {
           satoshi: ['Satoshi', 'sans-serif'],
