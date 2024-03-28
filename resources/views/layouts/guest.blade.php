@@ -4,6 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        {{-- <meta name="googlebot" content="noindex">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="index, follow">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="MobileOptimized" content="width">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <meta content="Site web de la ville de Haguenau, située dans la région Grand Est de la France. Cette page offre aux visiteurs un aperçu de la ville et de ses services, ainsi que des informations pratiques pour les résidents et les touristes. Vous pourrez trouver des info" name="description">
+        <meta content="Ville de Haguenau, Région Grand Est, Services municipaux, Événements locaux, Activités culturelles et sportives, Démarches administratives, Projets de la ville, Offres d'emploi, Informations pratiques, Tourisme, Actualités" name="keywords"> --}}
 
         <title>{{ config('app.name', "Wag' :: Content Web Site Updater") }}</title>
         <link rel="shortcut icon" href="{{ asset('favicon_backoffice.ico') }}" type="image/x-icon">

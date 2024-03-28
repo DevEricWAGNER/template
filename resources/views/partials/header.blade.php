@@ -1,8 +1,8 @@
 <header
-  class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
+  class="sticky top-0 flex w-full bg-white z-999 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
 >
   <div
-    class="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11"
+    class="flex items-center justify-between flex-grow px-4 py-4 shadow-2 md:px-6 2xl:px-11"
   >
     <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
       <!-- Hamburger Toggle BTN -->
@@ -11,7 +11,7 @@
         @click.stop="sidebarToggle = !sidebarToggle"
       >
         <span class="relative block h-5.5 w-5.5 cursor-pointer">
-          <span class="du-block absolute right-0 h-full w-full">
+          <span class="absolute right-0 w-full h-full du-block">
             <span
               class="relative left-0 top-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white"
               :class="{ '!w-full delay-300': !sidebarToggle }"
@@ -25,7 +25,7 @@
               :class="{ '!w-full delay-500': !sidebarToggle }"
             ></span>
           </span>
-          <span class="du-block absolute right-0 h-full w-full rotate-45">
+          <span class="absolute right-0 w-full h-full rotate-45 du-block">
             <span
               class="absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white"
               :class="{ '!h-0 delay-[0]': !sidebarToggle }"
@@ -38,14 +38,15 @@
         </span>
       </button>
       <!-- Hamburger Toggle BTN -->
-      <a class="block flex-shrink-0 lg:hidden" href="index.html">
-        <img src="./images/logo/logo-icon.svg" alt="Logo" />
+      <a class="flex-shrink-0 block lg:hidden" href="index.html">
+        <img src="{{ asset('img/logo_dark.svg') }}" class="block w-10 h-10 dark:hidden" alt="Logo" />
+        <img src="{{ asset('img/logo.svg') }}" class="hidden w-10 h-10 dark:block" alt="Logo" />
       </a>
     </div>
     <div class="hidden sm:block">
       <form action="https://formbold.com/s/unique_form_id" method="POST">
         <div class="relative">
-          <button class="absolute left-0 top-1/2 -translate-y-1/2">
+          <button class="absolute left-0 -translate-y-1/2 top-1/2">
             <svg
               class="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
               width="20"
@@ -72,7 +73,7 @@
           <input
             type="text"
             placeholder="Type to search..."
-            class="w-full bg-transparent pl-9 pr-4 focus:outline-none xl:w-125"
+            class="w-full pr-4 bg-transparent border-none pl-9 focus:outline-none xl:w-125"
           />
         </div>
       </form>
@@ -90,11 +91,11 @@
               type="checkbox"
               :value="darkMode"
               @change="darkMode = !darkMode"
-              class="absolute top-0 z-50 m-0 h-full w-full cursor-pointer opacity-0"
+              class="absolute top-0 z-50 w-full h-full m-0 opacity-0 cursor-pointer"
             />
             <span
               :class="darkMode && '!right-1 !translate-x-full'"
-              class="absolute left-1 top-1/2 flex h-6 w-6 -translate-y-1/2 translate-x-0 items-center justify-center rounded-full bg-white shadow-switcher duration-75 ease-linear"
+              class="absolute flex items-center justify-center w-6 h-6 duration-75 ease-linear translate-x-0 -translate-y-1/2 bg-white rounded-full left-1 top-1/2 shadow-switcher"
             >
               <span class="dark:hidden">
                 <svg
@@ -149,12 +150,12 @@
               class="absolute -top-0.5 right-0 z-1 h-2 w-2 rounded-full bg-meta-1"
             >
               <span
-                class="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"
+                class="absolute inline-flex w-full h-full rounded-full opacity-75 -z-1 animate-ping bg-meta-1"
               ></span>
             </span>
 
             <svg
-              class="fill-current duration-300 ease-in-out"
+              class="duration-300 ease-in-out fill-current"
               width="18"
               height="18"
               viewBox="0 0 18 18"
@@ -177,7 +178,7 @@
               <h5 class="text-sm font-medium text-bodydark2">Notification</h5>
             </div>
 
-            <ul class="flex h-auto flex-col overflow-y-auto">
+            <ul class="flex flex-col h-auto overflow-y-auto">
               <li>
                 <a
                   class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
@@ -263,12 +264,12 @@
               class="absolute -right-0.5 -top-0.5 z-1 h-2 w-2 rounded-full bg-meta-1"
             >
               <span
-                class="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-meta-1 opacity-75"
+                class="absolute inline-flex w-full h-full rounded-full opacity-75 -z-1 animate-ping bg-meta-1"
               ></span>
             </span>
 
             <svg
-              class="fill-current duration-300 ease-in-out"
+              class="duration-300 ease-in-out fill-current"
               width="18"
               height="18"
               viewBox="0 0 18 18"
@@ -303,7 +304,7 @@
               <h5 class="text-sm font-medium text-bodydark2">Messages</h5>
             </div>
 
-            <ul class="flex h-auto flex-col overflow-y-auto">
+            <ul class="flex flex-col h-auto overflow-y-auto">
               <li>
                 <a
                   class="flex gap-4.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
@@ -419,7 +420,7 @@
             <span class="block text-xs font-medium">{{ Auth::user()->email }}</span>
           </span>
 
-          <span class="h-12 w-12 rounded-full overflow-hidden">
+          <span class="w-12 h-12 overflow-hidden rounded-full">
             <img src="{{ asset('img/admin/Mr.png') }}" alt="User" />
           </span>
 

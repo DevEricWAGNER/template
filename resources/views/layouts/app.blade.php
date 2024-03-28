@@ -4,6 +4,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        {{-- <meta name="googlebot" content="noindex">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="index, follow">
+        <meta name="HandheldFriendly" content="true">
+        <meta name="MobileOptimized" content="width">
+        <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+        <meta content="Site web de la ville de Haguenau, située dans la région Grand Est de la France. Cette page offre aux visiteurs un aperçu de la ville et de ses services, ainsi que des informations pratiques pour les résidents et les touristes. Vous pourrez trouver des info" name="description">
+        <meta content="Ville de Haguenau, Région Grand Est, Services municipaux, Événements locaux, Activités culturelles et sportives, Démarches administratives, Projets de la ville, Offres d'emploi, Informations pratiques, Tourisme, Actualités" name="keywords"> --}}
+
 
         <title>{{ config('app.name', "Wag' :: Content Web Site Updater") }}</title>
         <link rel="shortcut icon" href="{{ asset('favicon_backoffice.ico') }}" type="image/x-icon">
@@ -15,35 +25,18 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-        <body
-            x-data="{ page: 'profile', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
-            x-init="
-                darkMode = JSON.parse(localStorage.getItem('darkMode'));
-                $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
-            :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
-            @include('partials.preloader')
-            <div class="flex h-screen overflow-hidden">
-                @include('partials.sidebar')
-
-                <!-- ===== Content Area Start ===== -->
-                <div
-                  class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
-                >
+    <body
+        x-data="{ page: 'profile', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+        x-init="
+            darkMode = JSON.parse(localStorage.getItem('darkMode'));
+            $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+        :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}">
+        @include('partials.preloader')
+        <div class="flex h-screen overflow-hidden">
+            @include('partials.sidebar')
+            <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto" >
                 @include('partials.header')
-
-                  <!-- ===== Main Content Start ===== -->
-                  <main>
-                    <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-                      <div class="mx-auto max-w-270">
-                        @if (isset($header))
-                            <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                                {{ $header }}
-                            </div>
-                        @endif
-                        {{ $slot }}
-                    </div>
-                </div>
-              </main>
+                {{ $slot }}
             </div>
         </div>
     </body>
