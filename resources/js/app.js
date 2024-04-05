@@ -5,6 +5,8 @@ import './bootstrap';
 import './darkmode';
 import './matomo';
 
+import 'flowbite';
+
 import Alpine from "alpinejs";
 import persist from "@alpinejs/persist";
 import flatpickr from "flatpickr";

@@ -20,6 +20,13 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'login',
+        'civilite',
+        'firstname',
+        'lastname',
+        'superadmin',
+        'activ',
     ];
 
     /**

@@ -29,19 +29,19 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <!-- Email Address -->
+                        <!-- Login -->
 
                             <div class="mb-4">
-                                <x-input-label for="email" :value="__('Email')" />
+                                <x-input-label for="login" :value="__('Login')" />
                                 <div class="relative">
                                     <x-text-input
-                                        id="email"
+                                        id="login"
                                         class="w-full py-4 pl-6 pr-10 bg-transparent border rounded-lg outline-none border-stroke focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                                        type="email"
-                                        name="email"
-                                        :value="old('email')"
+                                        type="text"
+                                        name="login"
+                                        :value="old('login')"
                                         required autofocus autocomplete="username"
-                                        placeholder="Enter your email" />
+                                        placeholder="Enter your login" />
                                     <span class="absolute right-4 top-4">
                                         <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g opacity="0.5">
@@ -50,7 +50,7 @@
                                         </svg>
                                     </span>
                                 </div>
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('login')" class="mt-2" />
                             </div>
 
                         <!-- Password -->

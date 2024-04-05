@@ -19,6 +19,7 @@
     "dependencies": {
         "apexcharts": "^3.48.0",
         "flatpickr": "^4.6.13",
+        "flowbite": "^2.3.0",
         "jsvectormap": "^1.5.3"
     }
 }
