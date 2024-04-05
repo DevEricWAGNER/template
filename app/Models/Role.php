@@ -13,4 +13,9 @@ class Role extends Model
         'label',
         'commentaire',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
 }
