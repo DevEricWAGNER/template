@@ -24,6 +24,7 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
     Route::prefix('/users')->group(function() {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::post('/create', [UserController::class, 'store'])->name('users.store');
+        Route::delete('/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
     });
 });
 
