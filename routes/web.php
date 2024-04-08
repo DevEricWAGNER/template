@@ -14,18 +14,18 @@ Route::get('/wag_cms/tinymce', function () {
 });
 
 Route::prefix('/controlpanel')->middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return redirect()->route('dashboard');
-    });
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::prefix('/users')->group(function() {
         Route::get('/', [UserController::class, 'index'])->name('users.index');
         Route::post('/create', [UserController::class, 'store'])->name('users.store');
-        Route::delete('/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/delete/{user_id}', [UserController::class, 'destroy'])->name('users.destroy');
+        Route::get('/{user_id}/edit', [UserController::class, 'edit']);
+        Route::patch('/update', [UserController::class, 'update'])->name('users.update');
     });
+    Route::get('/roles', [DashboardController::class, 'roles'])->name('roles');
 });
 
 Route::get('/test', function () {

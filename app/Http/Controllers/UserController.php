@@ -88,31 +88,55 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($user_id)
     {
-        //
+        $user = User::find($user_id);
+        return response()->json($user);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request)
     {
-        //
+        // dd($request->all());
+        $user = User::find($request->user_id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->login = $request->login;
+        $user->civilite = $request->civilite;
+        $user->firstname = $request->firstname;
+        $user->lastname = $request->lastname;
+        if ($request->superadmin) {
+            $user->superadmin = 1;
+            $user->role_id = 0;
+        } else {
+            $user->superadmin = 0;
+            $user->role_id = $request->role_id;
+        }
+        if ($request->activ) {
+            $user->activ = 1;
+        } else {
+            $user->activ = 0;
+        }
+        $user->save();
+
+        return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($user_id)
     {
+        $user = User::find($user_id);
         $user->delete();
-        return redirect()->route('users.index');
+        return true;
     }
 }

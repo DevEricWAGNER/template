@@ -421,7 +421,7 @@
           </span>
 
           <span class="w-12 h-12 overflow-hidden rounded-full">
-            <img src="{{ asset('img/admin/Mr.png') }}" alt="User" />
+            <img src="{{ asset('img/admin/'. Auth::user()->civilite .'png') }}" alt="User" />
           </span>
 
           <svg

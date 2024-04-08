@@ -33,7 +33,7 @@
                 <div class="flex flex-row justify-between px-7.5 py-6">
                    <div class="flex flex-col justify-between">
                       <h4 class="font-bold text-white text-title-xl">
-                         15
+                        {{ $pages }}
                       </h4>
                       <span class="font-medium text-white text-md">Pages Actives</span>
                    </div>
