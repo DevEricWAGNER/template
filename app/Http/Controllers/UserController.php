@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $users = User::all();
         $roles = Role::all();
-        return view('admin.users.index', compact('users', 'roles'));
+        return view('admin.users', compact('users', 'roles'));
     }
 
     /**

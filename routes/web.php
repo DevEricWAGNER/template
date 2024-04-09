@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,10 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
         Route::patch('/update', [UserController::class, 'update'])->name('users.update');
     });
     Route::get('/roles', [DashboardController::class, 'roles'])->name('roles');
+
+    Route::prefix('/project')->group(function() {
+        Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+    });
 });
 
 Route::get('/test', function () {
