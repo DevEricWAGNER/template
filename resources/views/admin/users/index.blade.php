@@ -328,7 +328,6 @@
 
         $(document).on('click', '.deletebutton', function() {
             user_id = $(this).data('user');
-            console.log(user_id)
             $('#user_id').val(user_id);
         });
 
@@ -345,7 +344,6 @@
 
         $(document).on('click', '.editbutton', function() {
             user_id = $(this).data('user');
-            console.log(user_id)
             // faire une requete ajax pour recuperer les infos de l'utilisateur
             $.ajax({
                 url: '/controlpanel/users/' + user_id + '/edit',
@@ -384,7 +382,6 @@
                 success: function(response) {
                     location.reload();
                 }
-
             })
         })
 
