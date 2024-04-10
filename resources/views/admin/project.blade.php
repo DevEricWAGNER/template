@@ -28,39 +28,75 @@
             </div>
             <div id="default-tab-content">
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="site" role="tabpanel" aria-labelledby="site-tab">
-                    <h2>Paramètres généraux du site</h2>
-                    <form action="">
-                        <div>
-                            <label for="siteName">Nom du site*</label>
-                            <input type="text" id="siteName" name="siteName">
+                    <h2 class="mb-8 text-4xl">Paramètres généraux du site</h2>
+                    <form action="" class="flex flex-col gap-6">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-6">
+                                <div>
+                                    <div class="flex rounded-lg shadow-sm">
+                                        <label for="siteName" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Nom du site*</label>
+                                        <input type="text" id="siteName" name="siteName" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex rounded-lg shadow-sm">
+                                        <label for="siteAuthor" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Auteur du site*</label>
+                                        <input type="text" id="siteAuthor" name="siteAuthor" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex rounded-lg shadow-sm">
+                                        <label for="sitePhoneNumber" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Numéro de Téléphone de contact*</label>
+                                        <input type="text" id="sitePhoneNumber" name="sitePhoneNumber" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    </div>
+                                </div>
+                                <div class="items-center overflow-hidden bg-white rounded-lg shadow-md w-fit dark:bg-boxdark">
+                                    <div class="px-4 py-6">
+                                        <div id="image-preview" class="flex items-center justify-center h-full p-6 mx-auto text-center bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg cursor-pointer ">
+                                            <input id="siteLogo" type="file" class="hidden" name="siteLogo" accept="image/*" />
+                                            <label for="siteLogo" class="cursor-pointer">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mx-auto mb-4 text-gray-700">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                                                </svg>
+                                                <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-700">{{ __('Upload picture') }}</h5>
+                                                <p class="text-sm font-normal text-gray-400 md:px-6">{{ __('Choose photo size should be less than ') }}<b class="text-gray-600">{{ __('2mb') }}</b></p>
+                                                <p class="text-sm font-normal text-gray-400 md:px-6">{{ __('and should be in ') }}<b class="text-gray-600">{{ __('JPG, PNG, or GIF') }}</b>{{ __(' format.') }}</p>
+                                                <span id="filename" class="z-50 text-gray-500 bg-gray-200"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-6">
+                                <div>
+                                    <div class="flex rounded-lg shadow-sm">
+                                        <label for="siteCopyright" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Copyright du site internet</label>
+                                        <input type="text" id="siteCopyright" name="siteCopyright" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="siteAdress" >Adresse de contact (pied de page)</label>
+                                    <textarea id="siteAdress" name="siteAdress"></textarea>
+                                </div>
+                            </div>
                         </div>
                         <div>
-                            <label for="siteAuthor">Auteur du site*</label>
-                            <input type="text" id="siteAuthor" name="siteAuthor">
+                            <div class="flex rounded-lg shadow-sm">
+                                <label for="siteKeywords" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Mot clé par défaut</label>
+                                <input type="text" id="siteKeywords" name="siteKeywords" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                            </div>
                         </div>
                         <div>
-                            <label for="siteAdress">Adresse de contact (pied de page)</label>
-                            <textarea id="siteAdress" name="siteAdress"></textarea>
+                            <div class="flex rounded-lg shadow-sm">
+                                <label for="siteDescription" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Description</label>
+                                <textarea id="siteDescription" name="siteDescription" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"></textarea>
+                            </div>
                         </div>
                         <div>
-                            <label for="siteCopyright">Copyright du site internet</label>
-                            <input type="text" id="siteCopyright" name="siteCopyright">
-                        </div>
-                        <div>
-                            <label for="sitePhoneNumber">Numéro de Téléphone de contact*</label>
-                            <input type="text" id="sitePhoneNumber" name="sitePhoneNumber">
-                        </div>
-                        <div>
-                            <label for="siteKeywords">Mot clé par défaut</label>
-                            <input type="text" id="siteKeywords" name="siteKeywords">
-                        </div>
-                        <div>
-                            <label for="siteDescription">Description</label>
-                            <input type="text" id="siteDescription" name="siteDescription">
-                        </div>
-                        <div>
-                            <label for="siteAdditional_metatags">Balise META</label>
-                            <input type="text" id="siteAdditional_metatags" name="siteAdditional_metatags">
+                            <div class="flex rounded-lg shadow-sm">
+                                <label for="siteAdditional_metatags" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Balise META</label>
+                                <textarea id="siteAdditional_metatags" name="siteAdditional_metatags" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"></textarea>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -85,4 +121,52 @@
             </div>
         </div>
     </main>
+    <script>
+        const uploadInput = document.getElementById('siteLogo');
+        const filenameLabel = document.getElementById('filename');
+        const imagePreview = document.getElementById('image-preview');
+
+        // Check if the event listener has been added before
+        let isEventListenerAdded = false;
+
+        uploadInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+
+            if (file) {
+                filenameLabel.textContent = file.name;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.classList.remove('p-6');
+                    imagePreview.innerHTML =
+                        `<img src="${e.target.result}" class="mx-auto rounded-lg max-h-48" alt="Image preview" />`;
+                    imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+
+                    if (!isEventListenerAdded) {
+                        imagePreview.addEventListener('click', () => {
+                            uploadInput.click();
+                        });
+                        isEventListenerAdded = true;
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                filenameLabel.textContent = '';
+                imagePreview.classList.add('p-6');
+                imagePreview.innerHTML =
+                    `<div class="flex items-center justify-center text-gray-500 bg-gray-200 rounded-lg">No image preview</div>`;
+                imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
+
+                imagePreview.removeEventListener('click', () => {
+                    uploadInput.click();
+                });
+
+                isEventListenerAdded = false;
+            }
+        });
+
+        uploadInput.addEventListener('click', (event) => {
+          event.stopPropagation();
+        });
+    </script>
 </x-app-layout>
