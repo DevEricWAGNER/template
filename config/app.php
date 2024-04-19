@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', "Wag' :: Content Web Site Updater" ),
+    'name' => env('APP_NAME', "Wag'CWSU" ),
 
     /*
     |--------------------------------------------------------------------------

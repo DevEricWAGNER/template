@@ -30,6 +30,7 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
 
     Route::prefix('/project')->group(function() {
         Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+        Route::get('/site', [ProjectController::class, 'site'])->name('project.site');
     });
 });
 

@@ -35,19 +35,19 @@
                                 <div>
                                     <div class="flex rounded-lg shadow-sm">
                                         <label for="siteName" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Nom du site*</label>
-                                        <input type="text" id="siteName" name="siteName" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                        <input type="text" id="siteName" name="siteName" value="{{$site->siteName}}" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div>
                                     <div class="flex rounded-lg shadow-sm">
                                         <label for="siteAuthor" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Auteur du site*</label>
-                                        <input type="text" id="siteAuthor" name="siteAuthor" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                        <input type="text" id="siteAuthor" name="siteAuthor" value="{{$site->siteAuthor}}" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div>
                                     <div class="flex rounded-lg shadow-sm">
                                         <label for="sitePhoneNumber" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Numéro de Téléphone de contact*</label>
-                                        <input type="text" id="sitePhoneNumber" name="sitePhoneNumber" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                        <input type="text" id="sitePhoneNumber" name="sitePhoneNumber" value="{{$site->sitePhoneNumber}}" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div class="items-center overflow-hidden bg-white rounded-lg shadow-md w-fit dark:bg-boxdark">
@@ -71,32 +71,35 @@
                                 <div>
                                     <div class="flex rounded-lg shadow-sm">
                                         <label for="siteCopyright" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Copyright du site internet</label>
-                                        <input type="text" id="siteCopyright" name="siteCopyright" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                        <input type="text" id="siteCopyright" value="{{$site->siteCopyright}}" name="siteCopyright" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div>
                                     <label for="siteAdress" >Adresse de contact (pied de page)</label>
-                                    <textarea id="siteAdress" name="siteAdress"></textarea>
+                                    <textarea id="siteAdress" name="siteAdress">{{$site->siteAdress}}</textarea>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <div class="flex rounded-lg shadow-sm">
                                 <label for="siteKeywords" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Mot clé par défaut</label>
-                                <input type="text" id="siteKeywords" name="siteKeywords" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                <input type="text" id="siteKeywords" value="{{$site->siteKeywords}}" name="siteKeywords" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                             </div>
                         </div>
                         <div>
                             <div class="flex rounded-lg shadow-sm">
                                 <label for="siteDescription" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Description</label>
-                                <textarea id="siteDescription" name="siteDescription" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"></textarea>
+                                <textarea id="siteDescription" name="siteDescription" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">{{$site->siteDescription}}</textarea>
                             </div>
                         </div>
                         <div>
                             <div class="flex rounded-lg shadow-sm">
                                 <label for="siteAdditional_metatags" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Balise META</label>
-                                <textarea id="siteAdditional_metatags" name="siteAdditional_metatags" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"></textarea>
+                                <textarea id="siteAdditional_metatags" name="siteAdditional_metatags" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">{{$site->siteAdditional_metatags}}</textarea>
                             </div>
+                        </div>
+                        <div class="">
+
                         </div>
                     </form>
                 </div>
@@ -122,6 +125,7 @@
         </div>
     </main>
     <script>
+
         const uploadInput = document.getElementById('siteLogo');
         const filenameLabel = document.getElementById('filename');
         const imagePreview = document.getElementById('image-preview');
@@ -151,7 +155,6 @@
                 };
                 reader.readAsDataURL(file);
             } else {
-                filenameLabel.textContent = '';
                 imagePreview.classList.add('p-6');
                 imagePreview.innerHTML =
                     `<div class="flex items-center justify-center text-gray-500 bg-gray-200 rounded-lg">No image preview</div>`;
@@ -169,4 +172,25 @@
           event.stopPropagation();
         });
     </script>
+
+    @if ($site->siteLogo)
+        <script>
+            const logo = "{{ asset('storage/' . $site->siteLogo . '.png') }}";
+
+            imagePreview.classList.remove('p-6');
+            imagePreview.innerHTML = `<img src="${logo}" class="mx-auto rounded-lg max-h-48" alt="Image preview" />`;
+            imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+
+            imagePreview.addEventListener('click', () => {
+                uploadInput.click();
+            });
+        </script>
+    @else
+        <script>
+            imagePreview.classList.add('p-6');
+            imagePreview.innerHTML = `<div class="flex items-center justify-center text-gray-500 bg-gray-200 rounded-lg">No image preview</div>`;
+            imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
+        </script>
+    @endif
+
 </x-app-layout>

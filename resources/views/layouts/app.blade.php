@@ -15,7 +15,7 @@
         <meta content="WebWagner, Région Grand Est, Services numériques, Développement Web, Conception Web, Intégration Web, Projets, Offres d'emploi, Informations pratiques, Services, Site Internet" name="keywords">
 
 
-        <title>{{ config('app.name', "Wag' :: Content Web Site Updater") }}</title>
+        <title>{{ config('app.name', "Wag'CWSU") }}</title>
         <link rel="shortcut icon" href="{{ asset('favicon_backoffice.ico') }}" type="image/x-icon">
 
         <!-- Fonts -->
