@@ -25,8 +25,8 @@ class ProjectController extends Controller
             $imageFullName = Carbon::now()->format('d-m-Y_H-i-s_v');
             $imageName = $imageFullName . '.png';
             // $site->siteLogo delete image from folder
-            if (file_exists(app_path('storage/' . $site->id . '/' . $site->siteLogo))){
-                unlink(app_path('storage/' . $site->id . '/' . $site->siteLogo));
+            if (file_exists(app_path('storage/' . $site->id . '/' . $site->siteLogo . '.png'))){
+                unlink(app_path('storage/' . $site->id . '/' . $site->siteLogo . '.png'));
             }
             $image->move(app_path('storage/' . $site->id), $imageName);
             $data["siteLogo"] = $imageFullName;
