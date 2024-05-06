@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -31,11 +32,12 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
     Route::prefix('/project')->group(function() {
         Route::get('/', [ProjectController::class, 'index'])->name('project.index');
         Route::get('/site', [ProjectController::class, 'site'])->name('project.site');
+        Route::patch('/update', [ProjectController::class, 'update'])->name('project.update');
     });
+
 });
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/storage/{siteId}/{imageName}', [ImageController::class, 'show'])->name('images.show');
+
 
 require __DIR__.'/auth.php';

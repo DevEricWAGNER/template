@@ -29,31 +29,33 @@
             <div id="default-tab-content">
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="site" role="tabpanel" aria-labelledby="site-tab">
                     <h2 class="mb-8 text-4xl">Paramètres généraux du site</h2>
-                    <form action="" class="flex flex-col gap-6">
-                        <div class="grid grid-cols-2 gap-6">
+                    <form action="{{route('project.update')}}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6" id="GeneralParameters">
+                        @csrf
+                        @method("PATCH")
+                        <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                             <div class="flex flex-col gap-6">
                                 <div>
-                                    <div class="flex rounded-lg shadow-sm">
-                                        <label for="siteName" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Nom du site*</label>
-                                        <input type="text" id="siteName" name="siteName" value="{{$site->siteName}}" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
+                                        <label for="siteName" class="inline-flex items-center gap-1 px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Nom du site <span class="text-xl text-danger">*<span></label>
+                                        <input type="text" id="siteName" name="siteName" value="{{$site->siteName}}" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="flex rounded-lg shadow-sm">
-                                        <label for="siteAuthor" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Auteur du site*</label>
-                                        <input type="text" id="siteAuthor" name="siteAuthor" value="{{$site->siteAuthor}}" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
+                                        <label for="siteAuthor" class="inline-flex items-center gap-1 px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Auteur du site <span class="text-xl text-danger">*<span></label>
+                                        <input type="text" id="siteAuthor" name="siteAuthor" value="{{$site->siteAuthor}}" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="flex rounded-lg shadow-sm">
-                                        <label for="sitePhoneNumber" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Numéro de Téléphone de contact*</label>
-                                        <input type="text" id="sitePhoneNumber" name="sitePhoneNumber" value="{{$site->sitePhoneNumber}}" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
+                                        <label for="sitePhoneNumber" class="inline-flex items-center gap-1 px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Numéro de Téléphone de contact <span class="text-xl text-danger">*<span></label>
+                                        <input type="text" id="sitePhoneNumber" name="sitePhoneNumber" value="{{$site->sitePhoneNumber}}" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div class="items-center overflow-hidden bg-white rounded-lg shadow-md w-fit dark:bg-boxdark">
                                     <div class="px-4 py-6">
+                                        <input id="siteLogo" type="file" class="hidden" name="siteLogo" accept="image/*"/>
                                         <div id="image-preview" class="flex items-center justify-center h-full p-6 mx-auto text-center bg-gray-100 border-2 border-gray-400 border-dashed rounded-lg cursor-pointer ">
-                                            <input id="siteLogo" type="file" class="hidden" name="siteLogo" accept="image/*" />
                                             <label for="siteLogo" class="cursor-pointer">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 mx-auto mb-4 text-gray-700">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
@@ -69,9 +71,9 @@
                             </div>
                             <div class="flex flex-col gap-6">
                                 <div>
-                                    <div class="flex rounded-lg shadow-sm">
-                                        <label for="siteCopyright" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Copyright du site internet</label>
-                                        <input type="text" id="siteCopyright" value="{{$site->siteCopyright}}" name="siteCopyright" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                                    <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
+                                        <label for="siteCopyright" class="inline-flex items-center px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Copyright du site internet</label>
+                                        <input type="text" id="siteCopyright" value="{{$site->siteCopyright}}" name="siteCopyright" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>
                                 <div>
@@ -81,25 +83,28 @@
                             </div>
                         </div>
                         <div>
-                            <div class="flex rounded-lg shadow-sm">
-                                <label for="siteKeywords" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Mot clé par défaut</label>
-                                <input type="text" id="siteKeywords" value="{{$site->siteKeywords}}" name="siteKeywords" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
+                            <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
+                                <label for="siteKeywords" class="inline-flex items-center px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Mot clé par défaut</label>
+                                <input type="text" id="siteKeywords" value="{{$site->siteKeywords}}" name="siteKeywords" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                             </div>
                         </div>
                         <div>
-                            <div class="flex rounded-lg shadow-sm">
-                                <label for="siteDescription" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Description</label>
-                                <textarea id="siteDescription" name="siteDescription" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">{{$site->siteDescription}}</textarea>
+                            <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
+                                <label for="siteDescription" class="inline-flex items-center px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Description</label>
+                                <textarea id="siteDescription" name="siteDescription" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">{{$site->siteDescription}}</textarea>
                             </div>
                         </div>
                         <div>
-                            <div class="flex rounded-lg shadow-sm">
-                                <label for="siteAdditional_metatags" class="inline-flex items-center px-4 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-s-md border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Balise META</label>
-                                <textarea id="siteAdditional_metatags" name="siteAdditional_metatags" class="block w-full px-4 py-3 text-sm border-gray-200 shadow-sm pe-11 rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">{{$site->siteAdditional_metatags}}</textarea>
+                            <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
+                                <label for="siteAdditional_metatags" class="inline-flex items-center px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Balise META</label>
+                                <textarea id="siteAdditional_metatags" name="siteAdditional_metatags" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">{{$site->siteAdditional_metatags}}</textarea>
                             </div>
                         </div>
-                        <div class="">
-
+                        <div class="flex flex-col overflow-hidden border border-gray-200 rounded-lg shadow-sm dark:border-gray-700">
+                            <span class="p-3 text-white bg-blue-500 dark:bg-blue-900">Validation des données</span>
+                            <div class="p-3">
+                                <button type="submit" class="px-3 py-2 text-black bg-blue-500 rounded-lg dark:text-white dark:bg-slate-900">Sauvegarder les données</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -175,7 +180,7 @@
 
     @if ($site->siteLogo)
         <script>
-            const logo = "{{ asset('storage/' . $site->siteLogo . '.png') }}";
+            const logo = "{{ route('images.show', ['siteId' => $site->id, 'imageName' => $site->siteLogo]) }}";
 
             imagePreview.classList.remove('p-6');
             imagePreview.innerHTML = `<img src="${logo}" class="mx-auto rounded-lg max-h-48" alt="Image preview" />`;

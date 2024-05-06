@@ -2,116 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-Light.woff2") format("woff2"),
-        url("../fonts/Satoshi-Light.woff") format("woff"),
-        url("../fonts/Satoshi-Light.ttf") format("truetype");
-    font-weight: 300;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-LightItalic.woff2") format("woff2"),
-        url("../fonts/Satoshi-LightItalic.woff") format("woff"),
-        url("../fonts/Satoshi-LightItalic.ttf") format("truetype");
-    font-weight: 300;
-    font-display: swap;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-Regular.woff2") format("woff2"),
-        url("../fonts/Satoshi-Regular.woff") format("woff"),
-        url("../fonts/Satoshi-Regular.ttf") format("truetype");
-    font-weight: 400;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-Italic.woff2") format("woff2"),
-        url("../fonts/Satoshi-Italic.woff") format("woff"),
-        url("../fonts/Satoshi-Italic.ttf") format("truetype");
-    font-weight: 400;
-    font-display: swap;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-Medium.woff2") format("woff2"),
-        url("../fonts/Satoshi-Medium.woff") format("woff"),
-        url("../fonts/Satoshi-Medium.ttf") format("truetype");
-    font-weight: 500;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-MediumItalic.woff2") format("woff2"),
-        url("../fonts/Satoshi-MediumItalic.woff") format("woff"),
-        url("../fonts/Satoshi-MediumItalic.ttf") format("truetype");
-    font-weight: 500;
-    font-display: swap;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-Bold.woff2") format("woff2"),
-        url("../fonts/Satoshi-Bold.woff") format("woff"),
-        url("../fonts/Satoshi-Bold.ttf") format("truetype");
-    font-weight: 700;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-BoldItalic.woff2") format("woff2"),
-        url("../fonts/Satoshi-BoldItalic.woff") format("woff"),
-        url("../fonts/Satoshi-BoldItalic.ttf") format("truetype");
-    font-weight: 700;
-    font-display: swap;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-Black.woff2") format("woff2"),
-        url("../fonts/Satoshi-Black.woff") format("woff"),
-        url("../fonts/Satoshi-Black.ttf") format("truetype");
-    font-weight: 900;
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "Satoshi";
-    src: url("../fonts/Satoshi-BlackItalic.woff2") format("woff2"),
-        url("../fonts/Satoshi-BlackItalic.woff") format("woff"),
-        url("../fonts/Satoshi-BlackItalic.ttf") format("truetype");
-    font-weight: 900;
-    font-display: swap;
-    font-style: italic;
-}
-
 @layer base {
     body {
         @apply relative text-base font-normal z-1 bg-whiten font-satoshi text-body;
     }
 }
 
-@layer components {}
+@layer components {
+}
 
 @layer utilities {
-
     /* Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
         display: none;
@@ -135,11 +35,11 @@
 
 /* third-party libraries CSS */
 
-.tableCheckbox:checked~div span {
+.tableCheckbox:checked ~ div span {
     @apply opacity-100;
 }
 
-.tableCheckbox:checked~div {
+.tableCheckbox:checked ~ div {
     @apply border-primary bg-primary;
 }
 
@@ -243,7 +143,7 @@ span.flatpickr-weekday,
 
 .flatpickr-day.inRange {
     @apply dark:!shadow-7;
-    box-shadow:-5px 0 0 #eff4fb, 5px 0 0 #eff4fb;
+    box-shadow: -5px 0 0 #eff4fb, 5px 0 0 #eff4fb;
 }
 
 .flatpickr-day.inRange,
@@ -290,9 +190,9 @@ span.flatpickr-weekday,
     @apply !border-primary !bg-primary hover:!border-primary hover:!bg-primary;
 }
 
-.flatpickr-day.selected.startRange+.endRange:not(:nth-child(7n + 1)),
-.flatpickr-day.startRange.startRange+.endRange:not(:nth-child(7n + 1)),
-.flatpickr-day.endRange.startRange+.endRange:not(:nth-child(7n + 1)) {
+.flatpickr-day.selected.startRange + .endRange:not(:nth-child(7n + 1)),
+.flatpickr-day.startRange.startRange + .endRange:not(:nth-child(7n + 1)),
+.flatpickr-day.endRange.startRange + .endRange:not(:nth-child(7n + 1)) {
     box-shadow: -10px 0 0 #3c50e0;
 }
 
@@ -324,15 +224,15 @@ span.flatpickr-weekday,
     @apply left-10 top-3;
 }
 
-.taskCheckbox:checked~.box span {
+.taskCheckbox:checked ~ .box span {
     @apply opacity-100;
 }
 
-.taskCheckbox:checked~p {
+.taskCheckbox:checked ~ p {
     @apply line-through;
 }
 
-.taskCheckbox:checked~.box {
+.taskCheckbox:checked ~ .box {
     @apply border-primary bg-primary dark:border-primary;
 }
 
