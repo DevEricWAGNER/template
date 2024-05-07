@@ -25,12 +25,15 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
         Route::post('/create', [UserController::class, 'store'])->name('users.store');
         Route::get('/delete/{user_id}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::get('/{user_id}/edit', [UserController::class, 'edit']);
+        Route::get('/{user_id}/edit_project/{project_id}', [UserController::class, 'edit_project']);
         Route::patch('/update', [UserController::class, 'update'])->name('users.update');
     });
+
     Route::get('/roles', [DashboardController::class, 'roles'])->name('roles');
+    Route::get('/projects', [DashboardController::class, 'projects'])->name('projects');
 
     Route::prefix('/project')->group(function() {
-        Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+        Route::get('/{project_id}', [ProjectController::class, 'index'])->name('project.index');
         Route::get('/site', [ProjectController::class, 'site'])->name('project.site');
         Route::patch('/update', [ProjectController::class, 'update'])->name('project.update');
     });

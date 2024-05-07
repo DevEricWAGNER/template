@@ -34,11 +34,21 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+        $loginName = $request->name;
 
+        // login = split name into first and last name and get only first letter of first name and full last name every letters in lowercase and with a . between them
+        $login = strtolower(substr($loginName, 0, 1) . '.' . explode(' ', $loginName)[1]);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'login' => $login,
+            'firstname' => explode(' ', $loginName)[0],
+            'lastname' => explode(' ', $loginName)[1],
+            'civilite' => 'M.',
+            'superadmin' => false,
+            'activ' => true,
+            'role_id' => 1,
         ]);
 
         event(new Registered($user));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Page;
+use App\Models\Project;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -24,5 +25,11 @@ class DashboardController extends Controller
     {
         $roles = Role::all();
         return $roles;
+    }
+
+    public function projects()
+    {
+        $projects = Project::all();
+        return $projects;
     }
 }

@@ -29,9 +29,10 @@
             <div id="default-tab-content">
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="site" role="tabpanel" aria-labelledby="site-tab">
                     <h2 class="mb-8 text-4xl">Paramètres généraux du site</h2>
-                    <form action="{{route('project.update')}}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6" id="GeneralParameters">
+                    <form action="{{route('project.update' )}}" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6" id="GeneralParameters">
                         @csrf
                         @method("PATCH")
+                        <input type="hidden" name="project_id" value="{{ Auth::user()->last_project_modified_id }}">
                         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
                             <div class="flex flex-col gap-6">
                                 <div>
@@ -72,7 +73,7 @@
                             <div class="flex flex-col gap-6">
                                 <div>
                                     <div class="flex flex-col rounded-lg shadow-sm lg:flex-row">
-                                        <label for="siteCopyright" class="inline-flex items-center px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Copyright du site internet</label>
+                                        <label for="siteCopyright" class="inline-flex items-center gap-1 px-4 py-3 text-sm text-gray-500 border border-gray-200 min-w-fit rounded-t-md lg:rounded-tr-none lg:rounded-l-md lg:border-e-0 bg-gray-50 dark:bg-gray-700 dark:border-gray-700 dark:text-gray-400">Copyright du site internet</label>
                                         <input type="text" id="siteCopyright" value="{{$site->siteCopyright}}" name="siteCopyright" class="block w-full px-4 py-3 text-sm border-gray-200 rounded-b-lg shadow-sm lg:rounded-b-none pe-11 lg:rounded-e-lg focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600">
                                     </div>
                                 </div>

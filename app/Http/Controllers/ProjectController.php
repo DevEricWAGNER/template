@@ -8,17 +8,21 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+    public function index($project_id)
     {
-        $site = Project::where('id', 1)->first();
+        $site = Project::where('id', $project_id)->first();
         return view('admin.project', compact('site'));
     }
 
     public function update(Request $request)
     {
         date_default_timezone_set("Europe/Paris");
-        $site = Project::where('id', 1)->first();
         $data = $request->all();
+        $site = Project::where('id', $data["project_id"])->first();
+
+        foreach ($data as $key => $value) {
+            $data[$key] = (string) $value;
+        }
 
         if ($request->hasFile('siteLogo')) {
             $image = $request->file('siteLogo');

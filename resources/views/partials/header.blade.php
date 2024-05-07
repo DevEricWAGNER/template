@@ -1,3 +1,7 @@
+@php
+    $projects = \App\Models\Project::all();
+@endphp
+
 <header
   class="sticky top-0 flex w-full bg-white z-999 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
 >
@@ -44,39 +48,23 @@
       </a>
     </div>
     <div class="hidden sm:block">
-      <form action="https://formbold.com/s/unique_form_id" method="POST">
-        <div class="relative">
-          <button class="absolute left-0 -translate-y-1/2 top-1/2">
-            <svg
-              class="fill-body hover:fill-primary dark:fill-bodydark dark:hover:fill-primary"
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M9.16666 3.33332C5.945 3.33332 3.33332 5.945 3.33332 9.16666C3.33332 12.3883 5.945 15 9.16666 15C12.3883 15 15 12.3883 15 9.16666C15 5.945 12.3883 3.33332 9.16666 3.33332ZM1.66666 9.16666C1.66666 5.02452 5.02452 1.66666 9.16666 1.66666C13.3088 1.66666 16.6667 5.02452 16.6667 9.16666C16.6667 13.3088 13.3088 16.6667 9.16666 16.6667C5.02452 16.6667 1.66666 13.3088 1.66666 9.16666Z"
-                fill=""
-              />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M13.2857 13.2857C13.6112 12.9603 14.1388 12.9603 14.4642 13.2857L18.0892 16.9107C18.4147 17.2362 18.4147 17.7638 18.0892 18.0892C17.7638 18.4147 17.2362 18.4147 16.9107 18.0892L13.2857 14.4642C12.9603 14.1388 12.9603 13.6112 13.2857 13.2857Z"
-                fill=""
-              />
-            </svg>
-          </button>
-
-          <input
-            type="text"
-            placeholder="Type to search..."
-            class="w-full pr-4 bg-transparent border-none pl-9 focus:outline-none xl:w-125"
-          />
+        <div>
+            <select id="edit_project" name="last_project_modified_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-personnalise-500 focus:border-personnalise-500 block w-full p-2.5 dark:bg-boxdark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-personnalise-500 dark:focus:border-personnalise-500">
+                <option selected disabled>Choisissez un Projet</option>
+                <option disabled>▬▬▬▬▬▬▬▬▬▬▬▬</option>
+                @if ($projects->isEmpty())
+                    <option disabled>Aucun projet</option>
+                @else
+                    @foreach ($projects as $project)
+                        @if ($project->id == Auth::user()->last_project_modified_id)
+                            <option value="{{ $project->id }}" selected>{{ $project->siteName }}</option>
+                        @else
+                            <option value="{{ $project->id }}">{{ $project->siteName }}</option>
+                        @endif
+                    @endforeach
+                @endif
+            </select>
         </div>
-      </form>
     </div>
 
     <div class="flex items-center gap-3 2xsm:gap-7">
@@ -552,3 +540,31 @@
     </div>
   </div>
 </header>
+
+<script>
+
+    var projects = [];
+    $.ajax({
+        url: '/controlpanel/projects',
+        type: 'GET',
+        success: function(response) {
+            projects = response;
+        }
+    });
+
+    // edit_project ajax request update users
+    let edit_project = document.getElementById('edit_project');
+    // on select change
+    edit_project.addEventListener('change', function() {
+        let project_id = this.value;
+        let user_id = {{ Auth::user()->id }};
+        $.ajax({
+            url: '/controlpanel/users/' + user_id + '/edit_project/' + project_id,
+            type: 'GET',
+            success: function(response) {
+                window.location.reload();
+            }
+        });
+
+    });
+</script>
