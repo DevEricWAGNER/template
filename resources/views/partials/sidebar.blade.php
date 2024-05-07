@@ -75,7 +75,7 @@
             @if ( Auth::user()->last_project_modified_id != null)
                 <a
                 class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
-                href="{{ route('project.index', Auth::user()->last_project_modified_id ) }}"
+                href="{{ route('project.index') }}"
                 @if (request()->routeIs('project.*'))
                     :class="'bg-graydark dark:bg-meta-4'"
                 @endif

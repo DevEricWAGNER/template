@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
-    public function index($project_id)
+    public function index()
     {
-        $site = Project::where('id', $project_id)->first();
+        $site = Project::where('id', Auth::user()->last_project_modified_id)->first();
         return view('admin.project', compact('site'));
     }
 

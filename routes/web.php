@@ -33,7 +33,7 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
     Route::get('/projects', [DashboardController::class, 'projects'])->name('projects');
 
     Route::prefix('/project')->group(function() {
-        Route::get('/{project_id}', [ProjectController::class, 'index'])->name('project.index');
+        Route::get('/', [ProjectController::class, 'index'])->name('project.index');
         Route::get('/site', [ProjectController::class, 'site'])->name('project.site');
         Route::patch('/update', [ProjectController::class, 'update'])->name('project.update');
     });
