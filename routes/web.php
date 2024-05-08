@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,7 +26,6 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
         Route::post('/create', [UserController::class, 'store'])->name('users.store');
         Route::get('/delete/{user_id}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::get('/{user_id}/edit', [UserController::class, 'edit']);
-        Route::get('/{user_id}/edit_project/{project_id}', [UserController::class, 'edit_project']);
         Route::patch('/update', [UserController::class, 'update'])->name('users.update');
     });
 
@@ -34,12 +34,12 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
 
     Route::prefix('/project')->group(function() {
         Route::get('/', [ProjectController::class, 'index'])->name('project.index');
+        Route::get('/{project_id}', [ProjectController::class, 'infos'])->name('project.infos');
         Route::get('/site', [ProjectController::class, 'site'])->name('project.site');
         Route::patch('/update', [ProjectController::class, 'update'])->name('project.update');
     });
 
 });
-
 Route::get('/storage/{siteId}/{imageName}', [ImageController::class, 'show'])->name('images.show');
 
 

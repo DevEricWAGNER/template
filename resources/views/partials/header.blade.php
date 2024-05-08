@@ -1,7 +1,3 @@
-@php
-    $projects = \App\Models\Project::all();
-@endphp
-
 <header
   class="sticky top-0 flex w-full bg-white z-999 drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
 >
@@ -50,19 +46,6 @@
     <div class="hidden sm:block">
         <div>
             <select id="edit_project" name="last_project_modified_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-personnalise-500 focus:border-personnalise-500 block w-full p-2.5 dark:bg-boxdark dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-personnalise-500 dark:focus:border-personnalise-500">
-                <option selected disabled>Choisissez un Projet</option>
-                <option disabled>▬▬▬▬▬▬▬▬▬▬▬▬</option>
-                @if ($projects->isEmpty())
-                    <option disabled>Aucun projet</option>
-                @else
-                    @foreach ($projects as $project)
-                        @if ($project->id == Auth::user()->last_project_modified_id)
-                            <option value="{{ $project->id }}" selected>{{ $project->siteName }}</option>
-                        @else
-                            <option value="{{ $project->id }}">{{ $project->siteName }}</option>
-                        @endif
-                    @endforeach
-                @endif
             </select>
         </div>
     </div>
@@ -540,31 +523,3 @@
     </div>
   </div>
 </header>
-
-<script>
-
-    var projects = [];
-    $.ajax({
-        url: '/controlpanel/projects',
-        type: 'GET',
-        success: function(response) {
-            projects = response;
-        }
-    });
-
-    // edit_project ajax request update users
-    let edit_project = document.getElementById('edit_project');
-    // on select change
-    edit_project.addEventListener('change', function() {
-        let project_id = this.value;
-        let user_id = {{ Auth::user()->id }};
-        $.ajax({
-            url: '/controlpanel/users/' + user_id + '/edit_project/' + project_id,
-            type: 'GET',
-            success: function(response) {
-                window.location.reload();
-            }
-        });
-
-    });
-</script>

@@ -11,8 +11,13 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $site = Project::where('id', Auth::user()->last_project_modified_id)->first();
-        return view('admin.project', compact('site'));
+        return view('admin.project');
+    }
+
+    public function infos($project_id)
+    {
+        $project = Project::find($project_id);
+        return response()->json($project);
     }
 
     public function update(Request $request)
@@ -28,13 +33,13 @@ class ProjectController extends Controller
         if ($request->hasFile('siteLogo')) {
             $image = $request->file('siteLogo');
             $imageFullName = Carbon::now()->format('d-m-Y_H-i-s_v');
-            $imageName = $imageFullName . '.png';
+            $imageName = $imageFullName . '.' . $image->getClientOriginalExtension();
             // $site->siteLogo delete image from folder
-            if (file_exists(app_path('storage/' . $site->id . '/' . $site->siteLogo . '.png'))){
-                unlink(app_path('storage/' . $site->id . '/' . $site->siteLogo . '.png'));
+            if (file_exists(app_path('storage/' . $site->id . '/' . $site->siteLogo ))){
+                unlink(app_path('storage/' . $site->id . '/' . $site->siteLogo));
             }
             $image->move(app_path('storage/' . $site->id), $imageName);
-            $data["siteLogo"] = $imageFullName;
+            $data["siteLogo"] = $imageName;
         } else {
             $data["siteLogo"] = $site->siteLogo;
         }

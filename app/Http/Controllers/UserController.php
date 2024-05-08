@@ -100,14 +100,6 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function edit_project($user_id, $project_id)
-    {
-        $user = User::find($user_id);
-        $user->last_project_modified_id = $project_id;
-        $user->save();
-        return redirect()->back();
-    }
-
     /**
      * Update the specified resource in storage.
      */
