@@ -68,11 +68,10 @@ class UserController extends Controller
         $user->lastname = $data['lastname'];
         if ($request->superadmin) {
             $user->superadmin = 1;
-            $user->role_id = 0;
         } else {
             $user->superadmin = 0;
-            $user->role_id = $data['role_id'];
         }
+        $user->role_id = $data['role_id'];
         if ($data['activ'] == 'on') {
             $user->activ = 1;
         } else {
@@ -114,11 +113,10 @@ class UserController extends Controller
         $user->lastname = $request->lastname;
         if ($request->superadmin) {
             $user->superadmin = 1;
-            $user->role_id = 0;
         } else {
             $user->superadmin = 0;
-            $user->role_id = $request->role_id;
         }
+        $user->role_id = $request->role_id;
         if ($request->activ) {
             $user->activ = 1;
         } else {

@@ -4,15 +4,15 @@
             <div class="mx-auto max-w-270">
                 <div class="flex flex-col gap-3 mb-6 sm:flex-row sm:items-center sm:justify-between" >
                     <h2 class="font-bold text-black text-title-md2 dark:text-white">
-                    Settings Page
+                    Page de Paramêtres
                     </h2>
 
                     <nav>
                         <ol class="flex items-center gap-2">
                             <li>
-                                <a class="font-medium" href="index.html">Dashboard /</a>
+                                <a class="font-medium" href="index.html">Controlpanel /</a>
                             </li>
-                            <li class="font-medium text-primary">Settings</li>
+                            <li class="font-medium text-primary">Paramêtres</li>
                         </ol>
                     </nav>
                 </div>

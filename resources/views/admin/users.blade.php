@@ -288,12 +288,12 @@
                     </div>
 				</div>
 				<div class="flex justify-center gap-4 mt-6">
-					<button type="submit" class="text-white bg-personnalise-700 hover:bg-personnalise-800 focus:ring-4 focus:outline-none focus:ring-personnalise-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-personnalise-600 dark:hover:bg-personnalise-700 dark:focus:ring-personnalise-800">Update product</button>
+					<button type="submit" class="text-white bg-personnalise-700 hover:bg-personnalise-800 focus:ring-4 focus:outline-none focus:ring-personnalise-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-personnalise-600 dark:hover:bg-personnalise-700 dark:focus:ring-personnalise-800">Enregister l'utilisateur</button>
                         <button type="button" id="deleteUserId" class="text-red-600 inline-flex justify-center items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
                             <svg aria-hidden="true" class="w-5 h-5 mr-1 -ml-1" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
                             </svg>
-                            Delete
+                            Supprimer
                         </button>
 				</div>
 			</form>
@@ -334,7 +334,7 @@
         // get all roles and stock them in a table and use them in all request (ajax request)
         var roles = [];
         $.ajax({
-            url: '/controlpanel/roles',
+            url: '/controlpanel/getRoles',
             type: 'GET',
             success: function(response) {
                 roles = response;

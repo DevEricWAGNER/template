@@ -1,11 +1,11 @@
 <div
-  class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+  class="bg-white border rounded-sm border-stroke shadow-default dark:border-strokedark dark:bg-boxdark"
 >
   <div
-    class="border-b border-stroke px-7 py-4 dark:border-strokedark"
+    class="py-4 border-b border-stroke px-7 dark:border-strokedark"
   >
     <h3 class="font-medium text-black dark:text-white">
-      Update Password
+      Modifier le mot de passe
     </h3>
   </div>
   <div class="p-7">
@@ -14,7 +14,7 @@
         @method('put')
 
         <div class="mb-5.5">
-            <x-input-label-update for="update_password_current_password" :value="__('Current Password')" />
+            <x-input-label-update for="update_password_current_password" :value="__('Mot de passe actuel')" />
             <div class="relative">
                 <span class="absolute left-4.5 top-4">
                     <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@
         </div>
 
         <div class="mb-5.5">
-            <x-input-label-update for="update_password_password" :value="__('New Password')" />
+            <x-input-label-update for="update_password_password" :value="__('Nouveau mot de passe')" />
             <div class="relative">
                 <span class="absolute left-4.5 top-4">
                     <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="mb-5.5">
-            <x-input-label-update for="update_password_password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label-update for="update_password_password_confirmation" :value="__('Confirmer le nouveau mot de passe')" />
             <div class="relative">
                 <span class="absolute left-4.5 top-4">
                     <svg class="fill-current" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,8 +61,8 @@
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
-        <div class="flex justify-end gap-4.5">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+        <div class="flex flex-col items-center gap-4.5">
+            <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
 
             @if (session('status') === 'password-updated')
                 <p
@@ -70,8 +70,8 @@
                     x-show="show"
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600 dark:text-gray-400"
-                >{{ __('Saved.') }}</p>
+                    class="text-sm text-green-600 dark:text-green-400"
+                >{{ __('Sauvegardé.') }}</p>
             @endif
         </div>
     </form>

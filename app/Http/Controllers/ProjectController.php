@@ -34,15 +34,28 @@ class ProjectController extends Controller
             $image = $request->file('siteLogo');
             $imageFullName = Carbon::now()->format('d-m-Y_H-i-s_v');
             $imageName = $imageFullName . '.' . $image->getClientOriginalExtension();
-            // $site->siteLogo delete image from folder
-            if (file_exists(app_path('storage/' . $site->id . '/' . $site->siteLogo ))){
-                unlink(app_path('storage/' . $site->id . '/' . $site->siteLogo));
+            if ($site->siteLogo != "") {
+                if (file_exists(app_path('storage/' . $site->id . '/' . $site->siteLogo ))){
+                    unlink(app_path('storage/' . $site->id . '/' . $site->siteLogo));
+                }
             }
             $image->move(app_path('storage/' . $site->id), $imageName);
             $data["siteLogo"] = $imageName;
-        } else {
-            $data["siteLogo"] = $site->siteLogo;
         }
+
+        if ($request->hasFile('siteEmailPhoto')) {
+            $image = $request->file('siteEmailPhoto');
+            $imageFullName = Carbon::now()->format('d-m-Y_H-i-s_v');
+            $imageName = $imageFullName . '.' . $image->getClientOriginalExtension();
+            if ($site->siteEmailPhoto != "") {
+                if (file_exists(app_path('storage/' . $site->id . '/' . $site->siteEmailPhoto ))){
+                    unlink(app_path('storage/' . $site->id . '/' . $site->siteEmailPhoto));
+                }
+            }
+            $image->move(app_path('storage/' . $site->id), $imageName);
+            $data["siteEmailPhoto"] = $imageName;
+        }
+
 
         $site->update($data);
 

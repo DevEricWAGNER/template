@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -28,8 +29,15 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
         Route::get('/{user_id}/edit', [UserController::class, 'edit']);
         Route::patch('/update', [UserController::class, 'update'])->name('users.update');
     });
+    Route::prefix('/roles')->group(function() {
+        Route::get('/', [RoleController::class, 'index'])->name('roles.index');
+        Route::post('/create', [RoleController::class, 'store'])->name('roles.store');
+        Route::get('/delete/{role_id}', [RoleController::class, 'destroy'])->name('roles.destroy');
+        Route::get('/{role_id}/edit', [RoleController::class, 'edit']);
+        Route::patch('/update', [RoleController::class, 'update'])->name('roles.update');
+    });
 
-    Route::get('/roles', [DashboardController::class, 'roles'])->name('roles');
+    Route::get('/getRoles', [DashboardController::class, 'roles'])->name('roles');
     Route::get('/projects', [DashboardController::class, 'projects'])->name('projects');
 
     Route::prefix('/project')->group(function() {

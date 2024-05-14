@@ -443,7 +443,7 @@
                     fill=""
                   />
                 </svg>
-                My Profile
+                Mon Profil
               </a>
             </li>
             <li>
@@ -464,7 +464,7 @@
                     fill=""
                   />
                 </svg>
-                My Contacts
+                Mes contacts
               </a>
             </li>
             <li>
@@ -489,7 +489,7 @@
                     fill=""
                   />
                 </svg>
-                Account Settings
+                Paramêtres
               </a>
             </li>
           </ul>
@@ -513,7 +513,7 @@
                     fill=""
                   />
                 </svg>
-                Log Out
+                Déconnexion
             </a>
             </form>
         </div>

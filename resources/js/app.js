@@ -108,13 +108,19 @@ edit_project.addEventListener('change', function() {
 
 
     if (Cookies.get('project_id') && window.location.pathname === "/controlpanel/project") {
-        const uploadInput = document.getElementById('siteLogo');
-        const filenameLabel = document.getElementById('filename');
-        const imagePreview = document.getElementById('image-preview');
+        const uploadInputSite = document.getElementById('siteLogo');
+        const filenameLabelSite = document.getElementById('filename');
+        const imagePreviewSite = document.getElementById('image-preview');
+
+        const uploadInputEmail = document.getElementById('siteEmailPhoto');
+        const filenameLabelEmail = document.getElementById('filenameEmail');
+        const imagePreviewEmail = document.getElementById('image-previewEmail');
 
         let cryptedProjectId = CryptoJS.AES.decrypt(Cookies.get('project_id'), 'secret key 123');
         let project_id = cryptedProjectId.toString(CryptoJS.enc.Utf8);
         $('#project_id_input').val(project_id);
+        $('#project_id_inputEmail').val(project_id);
+        $('#project_id_inputApi').val(project_id);
         let siteName = $('#siteName');
         let siteAuthor = $('#siteAuthor');
         let sitePhoneNumber = $('#sitePhoneNumber');
@@ -123,6 +129,8 @@ edit_project.addEventListener('change', function() {
         let siteKeywords = $('#siteKeywords');
         let siteDescription = $('#siteDescription');
         let siteAdditional_metatags = $('#siteAdditional_metatags');
+        let siteEmail = $('#siteEmail');
+        let siteEmailName = $('#siteEmailName');
 
         $.ajax({
             url: '/controlpanel/project/' + project_id,
@@ -136,65 +144,116 @@ edit_project.addEventListener('change', function() {
                 siteKeywords.val(response.siteKeywords);
                 siteDescription.val(response.siteDescription);
                 siteAdditional_metatags.val(response.siteAdditional_metatags);
+                siteEmail.val(response.siteEmail);
+                siteEmailName.val(response.siteEmailName);
 
-                console.log('/storage/' + project_id + '/' + response.siteLogo)
                 if (response.siteLogo != "") {
-                    imagePreview.classList.remove('p-6');
-                    imagePreview.innerHTML = '<img src="/storage/' + project_id + '/' + response.siteLogo + '" class="mx-auto rounded-lg max-h-48" alt="Image preview" />';
-                    imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+                    imagePreviewSite.classList.remove('p-6');
+                    imagePreviewSite.innerHTML = '<img src="/storage/' + project_id + '/' + response.siteLogo + '" class="mx-auto rounded-lg max-h-48" alt="Image preview" />';
+                    imagePreviewSite.classList.remove('border-dashed', 'border-2', 'border-gray-400');
 
 
-                    imagePreview.addEventListener('click', () => {
-                        uploadInput.click();
+                    imagePreviewSite.addEventListener('click', () => {
+                        uploadInputSite.click();
                     });
-                } else {
-                    imagePreview.classList.add('p-6');
-                    imagePreview.innerHTML = `<div class="flex items-center justify-center text-gray-500 bg-gray-200 rounded-lg">No image preview</div>`;
-                    imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
                 }
+
+                if (response.siteEmailPhoto != "") {
+                    imagePreviewEmail.classList.remove('p-6');
+                    imagePreviewEmail.innerHTML = '<img src="/storage/' + project_id + '/' + response.siteEmailPhoto + '" class="mx-auto rounded-lg max-h-48" alt="Image preview" />';
+                    imagePreviewEmail.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+
+
+                    imagePreviewEmail.addEventListener('click', () => {
+                        uploadInputEmail.click();
+                    });
+                }
+
 
             }
         });
         let isEventListenerAdded = false;
 
-        uploadInput.addEventListener('change', (event) => {
+        uploadInputSite.addEventListener('change', (event) => {
             const file = event.target.files[0];
 
             if (file) {
-                filenameLabel.textContent = file.name;
+                filenameLabelSite.textContent = file.name;
 
                 const reader = new FileReader();
                 reader.onload = (e) => {
-                    imagePreview.classList.remove('p-6');
-                    imagePreview.innerHTML =
+                    imagePreviewSite.classList.remove('p-6');
+                    imagePreviewSite.innerHTML =
                         `<img src="${e.target.result}" class="mx-auto rounded-lg max-h-48" alt="Image preview" />`;
-                    imagePreview.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+                    imagePreviewSite.classList.remove('border-dashed', 'border-2', 'border-gray-400');
 
                     if (!isEventListenerAdded) {
-                        imagePreview.addEventListener('click', () => {
-                            uploadInput.click();
+                        imagePreviewSite.addEventListener('click', () => {
+                            uploadInputSite.click();
                         });
                         isEventListenerAdded = true;
                     }
                 };
                 reader.readAsDataURL(file);
             } else {
-                imagePreview.classList.add('p-6');
-                imagePreview.innerHTML =
+                imagePreviewSite.classList.add('p-6');
+                imagePreviewSite.innerHTML =
                     `<div class="flex items-center justify-center text-gray-500 bg-gray-200 rounded-lg">No image preview</div>`;
-                imagePreview.classList.add('border-dashed', 'border-2', 'border-gray-400');
+                imagePreviewSite.classList.add('border-dashed', 'border-2', 'border-gray-400');
 
-                imagePreview.removeEventListener('click', () => {
-                    uploadInput.click();
+                imagePreviewSite.removeEventListener('click', () => {
+                    uploadInputSite.click();
                 });
 
                 isEventListenerAdded = false;
             }
         });
 
-        uploadInput.addEventListener('click', (event) => {
+        uploadInputSite.addEventListener('click', (event) => {
             event.stopPropagation();
         });
+
+        let isEventListenerAddedEmail = false;
+
+        uploadInputEmail.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+
+            if (file) {
+                filenameLabelEmail.textContent = file.name;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreviewEmail.classList.remove('p-6');
+                    imagePreviewEmail.innerHTML =
+                        `<img src="${e.target.result}" class="mx-auto rounded-lg max-h-48" alt="Image preview" />`;
+                    imagePreviewEmail.classList.remove('border-dashed', 'border-2', 'border-gray-400');
+
+                    if (!isEventListenerAddedEmail) {
+                        imagePreviewEmail.addEventListener('click', () => {
+                            uploadInputEmail.click();
+                        });
+                        isEventListenerAddedEmail = true;
+                    }
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imagePreviewEmail.classList.add('p-6');
+                imagePreviewEmail.innerHTML =
+                    `<div class="flex items-center justify-center text-gray-500 bg-gray-200 rounded-lg">No image preview</div>`;
+                imagePreviewEmail.classList.add('border-dashed', 'border-2', 'border-gray-400');
+
+                imagePreviewEmail.removeEventListener('click', () => {
+                    uploadInputEmail.click();
+                });
+
+                isEventListenerAddedEmail = false;
+            }
+        });
+
+        uploadInputEmail.addEventListener('click', (event) => {
+            event.stopPropagation();
+        });
+
     }
 
 
