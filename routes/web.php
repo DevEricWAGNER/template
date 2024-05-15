@@ -38,6 +38,7 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
     });
 
     Route::get('/getRoles', [DashboardController::class, 'roles'])->name('roles');
+    Route::get('/logs', [DashboardController::class, 'logs'])->name('logs');
     Route::get('/projects', [DashboardController::class, 'projects'])->name('projects');
 
     Route::prefix('/project')->group(function() {

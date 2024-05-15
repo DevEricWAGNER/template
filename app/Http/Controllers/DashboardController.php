@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Page;
 use App\Models\Project;
 use App\Models\Role;
@@ -31,5 +32,11 @@ class DashboardController extends Controller
     {
         $projects = Project::all();
         return $projects;
+    }
+
+    public function logs()
+    {
+        $logs = Log::all();
+        return $logs;
     }
 }

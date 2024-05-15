@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RoleController extends Controller
 {
@@ -35,6 +37,12 @@ class RoleController extends Controller
         $role->commentaire = $data['commentaire'];
         $role->save();
 
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'create role',
+            'description' => 'Role ' . $role->label . ' created.',
+        ]);
+
         return redirect()->route('roles.index');
     }
 
@@ -65,6 +73,12 @@ class RoleController extends Controller
         $role->commentaire = $request->commentaire;
         $role->save();
 
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update role',
+            'description' => 'Role ' . $role->label . ' updated.',
+        ]);
+
         return redirect()->route('roles.index');
     }
 
@@ -75,6 +89,13 @@ class RoleController extends Controller
     {
         $role = Role::find($role_id);
         $role->delete();
+
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'delete role',
+            'description' => 'Role ' . $role->label . ' deleted.',
+        ]);
+
         return true;
     }
 }

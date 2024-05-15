@@ -145,74 +145,17 @@
             x-show="dropdownOpen"
             class="absolute -right-27 mt-2.5 flex h-90 w-75 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark sm:right-0 sm:w-80"
           >
-            <div class="px-4.5 py-3">
+            <div class="px-4.5 py-3 flex justify-between">
               <h5 class="text-sm font-medium text-bodydark2">Notification</h5>
+              {{-- if auth is superadmin --}}
+              @if (Auth::user()->superadmin)
+                <a href="" class="text-sm font-medium hover:underline text-personnalise-300 hover:text-personnalise-500">Show all Logs</a>
+              @endif
+
             </div>
 
-            <ul class="flex flex-col h-auto overflow-y-auto">
-              <li>
-                <a
-                  class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-                  href="#"
-                >
-                  <p class="text-sm">
-                    <span class="text-black dark:text-white"
-                      >Edit your information in a swipe</span
-                    >
-                    Sint occaecat cupidatat non proident, sunt in culpa qui
-                    officia deserunt mollit anim.
-                  </p>
+            <ul class="flex flex-col h-auto overflow-y-auto" id="notifications">
 
-                  <p class="text-xs">12 May, 2025</p>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-                  href="#"
-                >
-                  <p class="text-sm">
-                    <span class="text-black dark:text-white"
-                      >It is a long established fact</span
-                    >
-                    that a reader will be distracted by the readable.
-                  </p>
-
-                  <p class="text-xs">24 Feb, 2025</p>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-                  href="#"
-                >
-                  <p class="text-sm">
-                    <span class="text-black dark:text-white"
-                      >There are many variations</span
-                    >
-                    of passages of Lorem Ipsum available, but the majority have
-                    suffered
-                  </p>
-
-                  <p class="text-xs">04 Jan, 2025</p>
-                </a>
-              </li>
-              <li>
-                <a
-                  class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-                  href="#"
-                >
-                  <p class="text-sm">
-                    <span class="text-black dark:text-white"
-                      >There are many variations</span
-                    >
-                    of passages of Lorem Ipsum available, but the majority have
-                    suffered
-                  </p>
-
-                  <p class="text-xs">01 Dec, 2024</p>
-                </a>
-              </li>
             </ul>
           </div>
           <!-- Dropdown End -->
@@ -523,3 +466,76 @@
     </div>
   </div>
 </header>
+
+<script>
+    let html = "";
+    $.ajax({
+            url: '/controlpanel/logs',
+            type: 'GET',
+            success: function(response) {
+                for (let i = 0; i < response.length; i++) {
+                    // formatedDate : 15 Mai 2024 à 09h23
+                    let formatedDate = new Date(response[i].created_at).toLocaleString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric'
+                    });
+                    html += `
+                        <li>
+                            <a
+                                class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
+                                href="#"
+                            >
+                                <p class="text-sm">
+                                    <span class="text-black dark:text-white">${response[i].action}</span>
+                                    ${response[i].description}
+                                </p>
+
+                                <p class="text-xs">${formatedDate}</p>
+                            </a>
+                        </li>
+                    `;
+                }
+                $('#notifications').html(html);
+            }
+        });
+    // execute script every 5 seconds
+    setInterval(() => {
+        html = "";
+        $.ajax({
+            url: '/controlpanel/logs',
+            type: 'GET',
+            success: function(response) {
+                for (let i = 0; i < response.length; i++) {
+                    // formatedDate : 15 Mai 2024 à 09h23
+                    let formatedDate = new Date(response[i].created_at).toLocaleString('fr-FR', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                        hour: 'numeric',
+                        minute: 'numeric'
+                    });
+                    html += `
+                        <li>
+                            <a
+                                class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
+                                href="#"
+                            >
+                                <p class="text-sm">
+                                    <span class="text-black dark:text-white">${response[i].action}</span>
+                                    ${response[i].description}
+                                </p>
+
+                                <p class="text-xs">${formatedDate}</p>
+                            </a>
+                        </li>
+                    `;
+                }
+                $('#notifications').html(html);
+            }
+        });
+    }, 5000);
+
+</script>

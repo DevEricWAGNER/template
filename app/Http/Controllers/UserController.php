@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -79,6 +81,12 @@ class UserController extends Controller
         }
         $user->save();
 
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'Ajout d\'un utilisateur',
+            'description' => 'Ajout de l\'utilisateur ' . $user->name,
+        ]);
+
         return redirect()->route('users.index');
     }
 
@@ -124,6 +132,12 @@ class UserController extends Controller
         }
         $user->save();
 
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'Modification d\'un utilisateur',
+            'description' => 'Modification de l\'utilisateur ' . $user->name,
+        ]);
+
         return redirect()->route('users.index');
     }
 
@@ -134,6 +148,13 @@ class UserController extends Controller
     {
         $user = User::find($user_id);
         $user->delete();
+
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'Suppression d\'un utilisateur',
+            'description' => 'Suppression de l\'utilisateur ' . $user->name,
+        ]);
+
         return true;
     }
 }

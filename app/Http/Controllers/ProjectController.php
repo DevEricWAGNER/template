@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Log;
 use App\Models\Project;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -55,9 +56,15 @@ class ProjectController extends Controller
             $image->move(app_path('storage/' . $site->id), $imageName);
             $data["siteEmailPhoto"] = $imageName;
         }
-
-
+        Log::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'update site settings',
+            'description' => 'Updating site settings from ' . json_encode($site) . ' to ' . json_encode($data),
+        ]);
         $site->update($data);
+
+
+
 
         return redirect()->back()->with('success', 'Site settings updated successfully');
     }
