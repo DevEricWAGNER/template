@@ -14,10 +14,6 @@
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit
                         suspendisse.
                     </p>
-
-                    <span class="inline-block mt-15">
-                        <img src="https://free-demo.tailadmin.com/src/images/illustration/illustration-03.svg" alt="illustration"/>
-                    </span>
                 </div>
             </div>
             <div class="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
@@ -77,6 +73,21 @@
 
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
+
+                        <div class="mb-6">
+                            {!!htmlFormSnippet()!!}
+
+                            @if($errors->has('g-recaptcha-response'))
+
+                                <div>
+                                    <small class="text-red-500">
+                                        {{$errors->first('g-recaptcha-response')}}
+                                    </small>
+                                </div>
+
+                            @endif
+                        </div>
+
 
                             <x-primary-button>
                                 {{ __('Sign In') }}
