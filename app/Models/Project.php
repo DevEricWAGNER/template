@@ -44,5 +44,13 @@ class Project extends Model
         'siteInstagram',
         'siteLinkedin',
         'viewHomePageLinkInNavbar',
+        'stripe_activ',
+        'stripe_key',
+        'stripe_secret',
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

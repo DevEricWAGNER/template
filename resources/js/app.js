@@ -119,8 +119,6 @@ edit_project.addEventListener('change', function() {
         let cryptedProjectId = CryptoJS.AES.decrypt(Cookies.get('project_id'), 'secret key 123');
         let project_id = cryptedProjectId.toString(CryptoJS.enc.Utf8);
         $('#project_id_input').val(project_id);
-        $('#project_id_inputEmail').val(project_id);
-        $('#project_id_inputApi').val(project_id);
         let siteName = $('#siteName');
         let siteAuthor = $('#siteAuthor');
         let sitePhoneNumber = $('#sitePhoneNumber');
@@ -131,25 +129,44 @@ edit_project.addEventListener('change', function() {
         let siteAdditional_metatags = $('#siteAdditional_metatags');
         let siteEmail = $('#siteEmail');
         let siteEmailName = $('#siteEmailName');
+        let googleCapt_activ = $('#googleCapt_activ');
+        let googleCapt_siteKey = $('#googleCapt_siteKey');
+        let googleCapt_secretKey = $('#googleCapt_secretKey');
+        let googleAnalytics_activ = $('#googleAnalytics_activ');
+        let googleAnalytics_code = $('#googleAnalytics_code');
+        let stripe_activ = $("#stripe_activ");
+        let stripe_key = $("#stripe_key");
+        let stripe_secret = $("#stripe_secret");
+        let siteYoutube = $("#siteYoutube");
+        let siteFacebook = $("#siteFacebook");
+        let siteTwitter = $("#siteTwitter");
+        let siteInstagram = $("#siteInstagram");
+        let siteLinkedin = $("#siteLinkedin");
 
         $.ajax({
             url: '/controlpanel/project/' + project_id,
             type: 'GET',
             success: function(response) {
-                siteName.val(response.siteName);
-                siteAuthor.val(response.siteAuthor);
-                sitePhoneNumber.val(response.sitePhoneNumber);
-                siteCopyright.val(response.siteCopyright);
-                siteAdress.val(response.siteAdress);
-                siteKeywords.val(response.siteKeywords);
-                siteDescription.val(response.siteDescription);
-                siteAdditional_metatags.val(response.siteAdditional_metatags);
-                siteEmail.val(response.siteEmail);
-                siteEmailName.val(response.siteEmailName);
+                console.log(response);
+                siteName.val(response.project.siteName);
+                siteAuthor.val(response.project.siteAuthor);
+                sitePhoneNumber.val(response.project.sitePhoneNumber);
+                siteCopyright.val(response.project.siteCopyright);
+                siteAdress.val(response.project.siteAdress);
+                siteKeywords.val(response.project.siteKeywords);
+                siteDescription.val(response.project.siteDescription);
+                siteAdditional_metatags.val(response.project.siteAdditional_metatags);
+                siteEmail.val(response.project.siteEmail);
+                siteEmailName.val(response.project.siteEmailName);
+                siteYoutube.val(response.project.siteYoutube);
+                siteFacebook.val(response.project.siteFacebook);
+                siteTwitter.val(response.project.siteTwitter);
+                siteInstagram.val(response.project.siteInstagram);
+                siteLinkedin.val(response.project.siteLinkedin);
 
-                if (response.siteLogo != "") {
+                if (response.project.siteLogo != "") {
                     imagePreviewSite.classList.remove('p-6');
-                    imagePreviewSite.innerHTML = '<img src="/storage/' + project_id + '/' + response.siteLogo + '" class="mx-auto rounded-lg max-h-48" alt="Image preview" />';
+                    imagePreviewSite.innerHTML = '<img src="/storage/' + project_id + '/' + response.project.siteLogo + '" class="mx-auto rounded-lg max-h-48" alt="Image preview" />';
                     imagePreviewSite.classList.remove('border-dashed', 'border-2', 'border-gray-400');
 
 
@@ -158,9 +175,9 @@ edit_project.addEventListener('change', function() {
                     });
                 }
 
-                if (response.siteEmailPhoto != "") {
+                if (response.project.siteEmailPhoto != "") {
                     imagePreviewEmail.classList.remove('p-6');
-                    imagePreviewEmail.innerHTML = '<img src="/storage/' + project_id + '/' + response.siteEmailPhoto + '" class="mx-auto rounded-lg max-h-48" alt="Image preview" />';
+                    imagePreviewEmail.innerHTML = '<img src="/storage/' + project_id + '/' + response.project.siteEmailPhoto + '" class="mx-auto rounded-lg max-h-48" alt="Image preview" />';
                     imagePreviewEmail.classList.remove('border-dashed', 'border-2', 'border-gray-400');
 
 
@@ -169,9 +186,123 @@ edit_project.addEventListener('change', function() {
                     });
                 }
 
+                if (response.project.googleCapt_activ == 1) {
+                    googleCapt_activ.prop('checked', true);
+                    document.getElementById("use_recaptcha").style.display = "block";
+                }
+                googleCapt_siteKey.val(response.project.googleCapt_siteKey);
+                googleCapt_secretKey.val(response.project.googleCapt_secretKey);
+
+                if (response.project.googleAnalytics_activ == 1) {
+                    googleAnalytics_activ.prop('checked', true);
+                    document.getElementById("use_gganalytics").style.display = "block";
+                }
+                googleAnalytics_code.val(response.project.googleAnalytics_code);
+
+                if (response.project.stripe_activ == 1) {
+                    stripe_activ.prop('checked', true);
+                    document.getElementById("use_stripe").style.display = "block";
+                }
+                stripe_key.val(response.project.stripe_key);
+                stripe_secret.val(response.project.stripe_secret);
+
+                let userIDs = new Set(response.users.map(user => user.id));
+                let me = response.me;
+
+                response.allUsers.forEach(user => {
+                    let actionHTML;
+                    if (userIDs.has(user.id)) {
+                        actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                    } else if (me.id == user.id) {
+                        actionHTML = "";
+                    } else {
+                        actionHTML = `<button data-userid='${user.id}' class="text-green-500 hover:underline add_user_to_project">Ajouter</button>`;
+                    }
+                    document.getElementById('project_users').innerHTML += `
+                        <div class="flex items center justify-between py-2 border-b border-gray-200">
+                            <div class="flex items center gap-2">
+                                <div class="flex items center gap-2">
+                                    <span class="font-medium text-bodydark1">${user.civilite} ${user.firstname} ${user.lastname}</span>
+                                    <span class="text-sm text-gray-500">(${user.email})</span>
+                                </div>
+                            </div>
+                            <div class="flex items center gap-2">
+                                ${actionHTML}
+                            </div>
+                        </div>
+                    `;
+                });
 
             }
         });
+
+        $(document).on('click', ".remove_user_from_project", function() {
+            let user_id = $(this).data('userid');
+            $.ajax({
+                url: '/controlpanel/project/' + project_id + '/remove_user/' + user_id,
+                type: 'GET',
+                success: function(response) {
+                    document.getElementById('project_users').innerHTML = '';
+                    let userIDs = new Set(response.users.map(user => user.id));
+                    response.allUsers.forEach(user => {
+                        let actionHTML;
+                        if (userIDs.has(user.id)) {
+                            actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                        } else {
+                            actionHTML = `<button data-userid='${user.id}' class="text-green hover:underline add_user_to_project">Ajouter</button>`;
+                        }
+                        document.getElementById('project_users').innerHTML += `
+                            <div class="flex items center justify-between py-2 border-b border-gray-200">
+                                <div class="flex items center gap-2">
+                                    <div class="flex items center gap-2">
+                                        <span class="font-medium text-bodydark1">${user.civilite} ${user.firstname} ${user.lastname}</span>
+                                        <span class="text-sm text-gray-500">(${user.email})</span>
+                                    </div>
+                                </div>
+                                <div class="flex items center gap-2">
+                                    ${actionHTML}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            });
+        });
+
+        $(document).on('click', ".add_user_to_project", function() {
+            let user_id = $(this).data('userid');
+            $.ajax({
+                url: '/controlpanel/project/' + project_id + '/add_user/' + user_id,
+                type: 'GET',
+                success: function(response) {
+                    document.getElementById('project_users').innerHTML = '';
+                    let userIDs = new Set(response.users.map(user => user.id));
+                    response.allUsers.forEach(user => {
+                        let actionHTML;
+                        if (userIDs.has(user.id)) {
+                            actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                        } else {
+                            actionHTML = `<button data-userid='${user.id}' class="text-green hover:underline add_user_to_project">Ajouter</button>`;
+                        }
+                        document.getElementById('project_users').innerHTML += `
+                            <div class="flex items center justify-between py-2 border-b border-gray-200">
+                                <div class="flex items center gap-2">
+                                    <div class="flex items center gap-2">
+                                        <span class="font-medium text-bodydark1">${user.civilite} ${user.firstname} ${user.lastname}</span>
+                                        <span class="text-sm text-gray-500">(${user.email})</span>
+                                    </div>
+                                </div>
+                                <div class="flex items center gap-2">
+                                    ${actionHTML}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            });
+        });
+
+
         let isEventListenerAdded = false;
 
         uploadInputSite.addEventListener('change', (event) => {

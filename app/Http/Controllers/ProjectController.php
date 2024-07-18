@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Log;
 use App\Models\Project;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,10 @@ class ProjectController extends Controller
     public function infos($project_id)
     {
         $project = Project::find($project_id);
-        return response()->json($project);
+        $users = $project->users;
+        $allUsers = User::all();
+        $me = Auth::user();
+        return response()->json(['project' => $project, 'users' => $users, 'allUsers' => $allUsers, 'me' => $me]);
     }
 
     public function update(Request $request)
@@ -26,6 +30,7 @@ class ProjectController extends Controller
         date_default_timezone_set("Europe/Paris");
         $data = $request->all();
         $site = Project::where('id', $data["project_id"])->first();
+
 
         foreach ($data as $key => $value) {
             $data[$key] = (string) $value;
@@ -56,6 +61,24 @@ class ProjectController extends Controller
             $image->move(app_path('storage/' . $site->id), $imageName);
             $data["siteEmailPhoto"] = $imageName;
         }
+        if (isset($data["googleCapt_siteKey"]) || isset($data["googleCapt_secretKey"]) || isset($data["googleAnalytics_code"]) || isset($data["stripe_key"]) || isset($data["stripe_secret"])) {
+            if ($request->googleCapt_activ == 'on') {
+                $data["googleCapt_activ"] = 1;
+            } else {
+                $data["googleCapt_activ"] = 0;
+            }
+            if ($request->googleAnalytics_activ == 'on') {
+                $data["googleAnalytics_activ"] = 1;
+            } else {
+                $data["googleAnalytics_activ"] = 0;
+            }
+            if ($request->stripe_activ == 'on') {
+                $data["stripe_activ"] = 1;
+            } else {
+                $data["stripe_activ"] = 0;
+            }
+        }
+
         Log::create([
             'user_id' => Auth::user()->id,
             'action' => 'update site settings',
@@ -67,5 +90,19 @@ class ProjectController extends Controller
 
 
         return redirect()->back()->with('success', 'Site settings updated successfully');
+    }
+
+    public function removeUser($project_id, $user_id)
+    {
+        $project = Project::find($project_id);
+        $project->users()->detach($user_id);
+        return redirect()->back()->with('success', 'User removed successfully');
+    }
+
+    public function addUser($project_id, $user_id)
+    {
+        $project = Project::find($project_id);
+        $project->users()->attach($user_id);
+        return redirect()->back()->with('success', 'User added successfully');
     }
 }

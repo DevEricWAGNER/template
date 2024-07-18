@@ -44,6 +44,8 @@ Route::prefix('/controlpanel')->middleware('auth')->group(function () {
     Route::prefix('/project')->group(function() {
         Route::get('/', [ProjectController::class, 'index'])->name('project.index');
         Route::get('/{project_id}', [ProjectController::class, 'infos'])->name('project.infos');
+        Route::get('/{project_id}/remove_user/{user_id}', [ProjectController::class, 'removeUser'])->name('project.removeUser');
+        Route::get('/{project_id}/add_user/{user_id}', [ProjectController::class, 'addUser'])->name('project.addUser');
         Route::get('/site', [ProjectController::class, 'site'])->name('project.site');
         Route::patch('/update', [ProjectController::class, 'update'])->name('project.update');
     });

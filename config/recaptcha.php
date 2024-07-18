@@ -9,9 +9,13 @@
  * MIT license: https://github.com/biscolab/laravel-recaptcha/blob/master/LICENSE
  */
 
+use Illuminate\Support\Facades\DB;
+
 /**
  * To configure correctly please visit https://developers.google.com/recaptcha/docs/start
  */
+//$siteKey = DB::table('projects')->where('id', 1)->value('googleCapt_siteKey');
+//$secretKey = DB::table('projects')->where('id', 1)->value('googleCapt_secretKey');
 return [
 
     /**

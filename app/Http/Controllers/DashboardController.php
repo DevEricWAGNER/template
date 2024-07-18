@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -30,7 +31,11 @@ class DashboardController extends Controller
 
     public function projects()
     {
-        $projects = Project::all();
+        if (Auth::user()->superadmin) {
+            $projects = Project::all();
+        } else {
+            $projects = Auth::user()->projects;
+        }
         return $projects;
     }
 
