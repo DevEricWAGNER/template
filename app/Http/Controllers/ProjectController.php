@@ -21,7 +21,7 @@ class ProjectController extends Controller
         $project = Project::find($project_id);
         $users = $project->users;
         $allUsers = User::all();
-        $me = Auth::user();
+        $me = Auth::user()->id;
         return response()->json(['project' => $project, 'users' => $users, 'allUsers' => $allUsers, 'me' => $me]);
     }
 
@@ -96,13 +96,37 @@ class ProjectController extends Controller
     {
         $project = Project::find($project_id);
         $project->users()->detach($user_id);
-        return redirect()->back()->with('success', 'User removed successfully');
+        $users = $project->users;
+        $allUsers = User::all();
+        $me = Auth::user()->id;
+        return response()->json(['project' => $project, 'users' => $users, 'allUsers' => $allUsers, 'me' => $me]);
     }
 
     public function addUser($project_id, $user_id)
     {
         $project = Project::find($project_id);
         $project->users()->attach($user_id);
-        return redirect()->back()->with('success', 'User added successfully');
+        $users = $project->users;
+        $allUsers = User::all();
+        $me = Auth::user()->id;
+        return response()->json(['project' => $project, 'users' => $users, 'allUsers' => $allUsers, 'me' => $me]);
+    }
+
+    public function transferOwnerShip($project_id, $user_id)
+    {
+        $project = Project::find($project_id);
+        // si je suis propriétaire du projet je transfert la propriété à un autre utilisateur en le retirant de la liste des utilisateurs et je m'ajoute à la liste des utilisateurs
+        if ($project->user_id == Auth::user()->id) {
+            $project->user_id = $user_id;
+            $project->save();
+            $project->users()->attach(Auth::user()->id);
+            $project->users()->detach($user_id);
+        }
+
+        $projectAfter = Project::find($project_id);
+        $users = $project->users;
+        $allUsers = User::all();
+        $me = Auth::user()->id;
+        return response()->json(['project' => $projectAfter, 'users' => $users, 'allUsers' => $allUsers, 'me' => $me]);
     }
 }

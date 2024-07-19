@@ -207,16 +207,33 @@ edit_project.addEventListener('change', function() {
                 stripe_secret.val(response.project.stripe_secret);
 
                 let userIDs = new Set(response.users.map(user => user.id));
-                let me = response.me;
 
                 response.allUsers.forEach(user => {
                     let actionHTML;
-                    if (userIDs.has(user.id)) {
-                        actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
-                    } else if (me.id == user.id) {
-                        actionHTML = "";
+                    if (user.id == response.project.user_id) {
+                        actionHTML = `<span class="text-green-500">Propriétaire</span>`;
                     } else {
-                        actionHTML = `<button data-userid='${user.id}' class="text-green-500 hover:underline add_user_to_project">Ajouter</button>`;
+                        if (response.me == user.id) {
+                            if (response.me == response.project.user_id) {
+                                actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                            } else {
+                                actionHTML = ``;
+                            }
+                        } else {
+                            if (userIDs.has(user.id)) {
+                                actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                            } else {
+                                actionHTML = `<button data-userid='${user.id}' class="text-green-500 hover:underline add_user_to_project">Ajouter</button>`;
+                            }
+                        }
+                    }
+                    // si je suis propriétaire du projet ajouter un bouton pour transférer la propriété
+                    if (response.me == response.project.user_id) {
+                        if (user.id == response.project.user_id) {
+                            actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                        } else {
+                            actionHTML += `<button data-userid='${user.id}' class="text-blue-500 hover:underline transfer_ownership">Transférer la propriété</button>`;
+                        }
                     }
                     document.getElementById('project_users').innerHTML += `
                         <div class="flex items center justify-between py-2 border-b border-gray-200">
@@ -236,7 +253,8 @@ edit_project.addEventListener('change', function() {
             }
         });
 
-        $(document).on('click', ".remove_user_from_project", function() {
+        $(document).on('click', ".remove_user_from_project", function(event) {
+            event.preventDefault();
             let user_id = $(this).data('userid');
             $.ajax({
                 url: '/controlpanel/project/' + project_id + '/remove_user/' + user_id,
@@ -246,10 +264,30 @@ edit_project.addEventListener('change', function() {
                     let userIDs = new Set(response.users.map(user => user.id));
                     response.allUsers.forEach(user => {
                         let actionHTML;
-                        if (userIDs.has(user.id)) {
-                            actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                        if (user.id == response.project.user_id) {
+                            actionHTML = `<span class="text-green-500">Propriétaire</span>`;
                         } else {
-                            actionHTML = `<button data-userid='${user.id}' class="text-green hover:underline add_user_to_project">Ajouter</button>`;
+                            if (response.me == user.id) {
+                                if (response.me == response.project.user_id) {
+                                    actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                                } else {
+                                    actionHTML = ``;
+                                }
+                            } else {
+                                if (userIDs.has(user.id)) {
+                                    actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                                } else {
+                                    actionHTML = `<button data-userid='${user.id}' class="text-green-500 hover:underline add_user_to_project">Ajouter</button>`;
+                                }
+                            }
+                        }
+                        // si je suis propriétaire du projet ajouter un bouton pour transférer la propriété
+                        if (response.me == response.project.user_id) {
+                            if (user.id == response.project.user_id) {
+                                actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                            } else {
+                                actionHTML += `<button data-userid='${user.id}' class="text-blue-500 hover:underline transfer_ownership">Transférer la propriété</button>`;
+                            }
                         }
                         document.getElementById('project_users').innerHTML += `
                             <div class="flex items center justify-between py-2 border-b border-gray-200">
@@ -269,7 +307,8 @@ edit_project.addEventListener('change', function() {
             });
         });
 
-        $(document).on('click', ".add_user_to_project", function() {
+        $(document).on('click', ".add_user_to_project", function(event) {
+            event.preventDefault();
             let user_id = $(this).data('userid');
             $.ajax({
                 url: '/controlpanel/project/' + project_id + '/add_user/' + user_id,
@@ -279,10 +318,84 @@ edit_project.addEventListener('change', function() {
                     let userIDs = new Set(response.users.map(user => user.id));
                     response.allUsers.forEach(user => {
                         let actionHTML;
-                        if (userIDs.has(user.id)) {
-                            actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                        if (user.id == response.project.user_id) {
+                            actionHTML = `<span class="text-green-500">Propriétaire</span>`;
                         } else {
-                            actionHTML = `<button data-userid='${user.id}' class="text-green hover:underline add_user_to_project">Ajouter</button>`;
+                            if (response.me == user.id) {
+                                if (response.me == response.project.user_id) {
+                                    actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                                } else {
+                                    actionHTML = ``;
+                                }
+                            } else {
+                                if (userIDs.has(user.id)) {
+                                    actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                                } else {
+                                    actionHTML = `<button data-userid='${user.id}' class="text-green-500 hover:underline add_user_to_project">Ajouter</button>`;
+                                }
+                            }
+                        }
+                        // si je suis propriétaire du projet ajouter un bouton pour transférer la propriété
+                        if (response.me == response.project.user_id) {
+                            if (user.id == response.project.user_id) {
+                                actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                            } else {
+                                actionHTML += `<button data-userid='${user.id}' class="text-blue-500 hover:underline transfer_ownership">Transférer la propriété</button>`;
+                            }
+                        }
+                        document.getElementById('project_users').innerHTML += `
+                            <div class="flex items center justify-between py-2 border-b border-gray-200">
+                                <div class="flex items center gap-2">
+                                    <div class="flex items center gap-2">
+                                        <span class="font-medium text-bodydark1">${user.civilite} ${user.firstname} ${user.lastname}</span>
+                                        <span class="text-sm text-gray-500">(${user.email})</span>
+                                    </div>
+                                </div>
+                                <div class="flex items center gap-2">
+                                    ${actionHTML}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            });
+        });
+
+        $(document).on('click', ".transfer_ownership", function(event) {
+            event.preventDefault();
+            let user_id = $(this).data('userid');
+            $.ajax({
+                url: '/controlpanel/project/' + project_id + '/transfer_ownership/' + user_id,
+                type: 'GET',
+                success: function(response) {
+                    document.getElementById('project_users').innerHTML = '';
+                    let userIDs = new Set(response.users.map(user => user.id));
+                    response.allUsers.forEach(user => {
+                        let actionHTML;
+                        if (user.id == response.project.user_id) {
+                            actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                        } else {
+                            if (response.me == user.id) {
+                                if (response.me == response.project.user_id) {
+                                    actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                                } else {
+                                    actionHTML = ``;
+                                }
+                            } else {
+                                if (userIDs.has(user.id)) {
+                                    actionHTML = `<button data-userid='${user.id}' class="text-red-500 hover:underline remove_user_from_project">Retirer</button>`;
+                                } else {
+                                    actionHTML = `<button data-userid='${user.id}' class="text-green text-green-500 hover:underline add_user_to_project">Ajouter</button>`;
+                                }
+                            }
+                        }
+                        // si je suis propriétaire du projet ajouter un bouton pour transférer la propriété
+                        if (response.me == response.project.user_id) {
+                            if (user.id == response.project.user_id) {
+                                actionHTML = `<span class="text-green-500">Propriétaire</span>`;
+                            } else {
+                                actionHTML += `<button data-userid='${user.id}' class="text-blue-500 hover:underline transfer_ownership">Transférer la propriété</button>`;
+                            }
                         }
                         document.getElementById('project_users').innerHTML += `
                             <div class="flex items center justify-between py-2 border-b border-gray-200">
